@@ -3,9 +3,33 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./src/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frontend Mentor | Frontend quiz app</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <style>
+    html.dark {
+      background-color: #313E51;
+    }
+
+    html {
+      background-color: #F4F6FA;
+    }
+  </style>
+
 </head>
 
 <body>

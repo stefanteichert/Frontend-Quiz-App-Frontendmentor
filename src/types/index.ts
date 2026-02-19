@@ -1,11 +1,4 @@
-export interface Question {
-  question: string;
-  options: string[];
-  answer: string;
-}
+export * from './quiz.ts'
+export * from './app.ts'
+export * from './ui.ts'
 
-export interface Quiz {
-  title: string;
-  icon: string;
-  questions: Question[];
-}

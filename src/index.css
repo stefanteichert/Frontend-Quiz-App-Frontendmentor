@@ -1,3 +1,118 @@
 @import "tailwindcss";
 
+/* rubik-300 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 300;
+  src: url('./assets/fonts/rubik-v31-latin-300.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* rubik-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/rubik-v31-latin-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* rubik-italic - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./assets/fonts/rubik-v31-latin-italic.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* rubik-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./assets/fonts/rubik-v31-latin-500.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light dark;
+}
+
+@theme {
+  --font-sans: 'Rubik', sans-serif, system-ui;
+
+
+  --color-white: hsl(0, 100%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+
+  --color-grey-500: hsl(219, 13%, 44%);
+  --color-grey-50: hsl(220, 38%, 97%);
+
+  --color-blue-950: hsl(214, 24%, 23%);
+  --color-blue-900: hsl(216, 25%, 25%);
+  --color-blue-850: hsl(215, 27%, 32%);
+  --color-blue-500: hsl(223, 100%, 59%);
+  --color-blue-300: hsl(216, 47%, 78%);
+  --color-blue-100: hsl(220, 50%, 95%);
+  --color-blue-50: hsl(225, 100%, 96%);
+
+  --color-green-500: hsl(151, 68%, 52%);
+  --color-green-100: hsl(151, 88%, 94%);
+
+  --color-purple-600: hsl(277, 91%, 56%);
+  --color-purple-100: hsl(278, 100%, 95%);
+
+  --color-orange-400: hsl(22, 100%, 60%);
+  --color-orange-50: hsl(27, 100%, 96%);
+
+  --color-red-500: hsl(0, 82%, 63%);
+}
+
+@utility text-preset-1 {
+  font-size: clamp(5.5rem, 5.3vw + 4.3rem, 9rem);
+  line-height: 1;
+  font-weight: 500;
+}
+
+@utility text-preset-2-medium {
+  font-size: clamp(2.5rem, 1.9718rem + 2.2535vw, 4rem);
+  line-height: 1;
+  font-weight: 500;
+}
+
+@utility text-preset-2-light {
+  font-size: clamp(2.5rem, 1.9718rem + 2.2535vw, 4rem);
+  line-height: 1;
+  font-weight: 300;
+}
+
+@utility text-preset-3 {
+  font-size: clamp(1.25rem, 0.8979rem + 1.5023vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+@utility text-preset-4 {
+  font-size: clamp(1.125rem, 0.9049rem + 0.939vw, 1.75rem);
+  line-height: 1;
+  font-weight: 500;
+}
+
+@utility text-preset-5 {
+  font-size: clamp(0.875rem, 0.6549rem + 0.939vw, 1.5rem);
+  line-height: 1.5;
+}
+
+@utility text-preset-6 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-style: italic;
+}
