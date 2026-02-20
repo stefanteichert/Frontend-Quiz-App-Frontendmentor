@@ -74,6 +74,9 @@
   --color-orange-50: hsl(27, 100%, 96%);
 
   --color-red-500: hsl(0, 82%, 63%);
+
+  --breakpoint-tablet: 640px;
+  --breakpoint-desktop: 1160px;
 }
 
 @utility text-preset-1 {
@@ -115,4 +118,36 @@
   font-size: 1.5rem;
   line-height: 1.5;
   font-style: italic;
+}
+
+.app-background {
+  background-repeat: no-repeat;
+  background-position: top -60px left 0px;
+  background-image: url('./assets/images/pattern-background-mobile-light.svg');
+}
+
+.dark .app-background {
+  background-image: url('./assets/images/pattern-background-mobile-dark.svg');
+}
+
+@media (min-width: 640px) {
+  .app-background {
+    background-image: url('./assets/images/pattern-background-tablet-light.svg');
+  }
+
+  .dark .app-background {
+    background-image: url('./assets/images/pattern-background-tablet-dark.svg');
+  }
+}
+
+@media (min-width: 1160px) {
+  .app-background {
+    background-image: url('./assets/images/pattern-background-desktop-light.svg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .dark .app-background {
+    background-image: url('./assets/images/pattern-background-desktop-dark.svg');
+  }
 }

@@ -13,7 +13,7 @@ const Header = ({ selectedQuiz, theme, onToggle }: HeaderProps) => {
   const quizTheme = selectedQuiz ? getTopicTheme(selectedQuiz.title) : null;
 
   return (
-    <header className="flex items-center justify-between px-6 py-4 md:p-10 lg:px-0 lg:py-12 max-w-290 mx-auto w-full">
+    <header className="flex items-center justify-between py-4">
       <div className="flex items-center gap-4">
         {selectedQuiz && (
           <>
