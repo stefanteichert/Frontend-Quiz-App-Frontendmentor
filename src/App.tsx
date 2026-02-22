@@ -3,11 +3,13 @@ import Header from './components/Header';
 import type { Quiz, AppStatus, Theme, DataStructure } from './types';
 import WelcomeScreen from './components/WelcomeScreen';
 import QuizScreen from './components/QuizScreen';
+import ResultScreen from './components/ResultScreen';
 
 function App() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [status, setStatus] = useState<AppStatus>('loading');
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [score, setScore] = useState(0);
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('theme');
     if (saved === 'light' || saved === 'dark') return saved;
@@ -43,6 +45,20 @@ function App() {
 
   const activeQuiz = quizzes.find(q => q.title === selectedTopic) || null;
 
+  const handleSelectQuiz = (topic: string) => {
+    setSelectedTopic(topic);
+    setScore(0);
+  };
+
+  const handleFinish = () => {
+    setStatus('results');
+  };
+
+  const resetQuiz = () => {
+    setStatus('ready');
+    setSelectedTopic(null);
+    setScore(0);
+  }
 
   if (status === 'loading') {
     return (
@@ -66,16 +82,21 @@ function App() {
       <div className="w-full min-w-81.75 tablet:max-w-160 desktop:max-w-290 mx-auto flex flex-col pt-6 px-6 tablet:pt-8 desktop:pt-18">
         <Header theme={theme} onToggle={setTheme} selectedQuiz={activeQuiz} />
         <main className="mt-8 tablet:mt-10 desktop:mt-24.75">
-          {!selectedTopic ? (
-            <WelcomeScreen quizzes={quizzes} onSelect={setSelectedTopic} />
+          {status === 'results' ? (
+            <ResultScreen score={score} selectedQuiz={activeQuiz} resetQuiz={resetQuiz} />
+          ) : !selectedTopic ? (
+            <WelcomeScreen quizzes={quizzes} onSelect={handleSelectQuiz} />
           ) : (
-            <QuizScreen activeQuiz={activeQuiz} />
+            <QuizScreen
+              activeQuiz={activeQuiz}
+              onScoreUpdate={() => setScore(prev => prev + 1)}
+              onFinish={handleFinish}
+            />
           )}
         </main>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

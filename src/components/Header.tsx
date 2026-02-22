@@ -3,8 +3,8 @@ import type { Theme, Quiz } from "../types";
 import { getTopicTheme } from "../constants/quizTheme";
 
 interface HeaderProps {
-  selectedQuiz: Quiz | null
-  theme: Theme,
+  selectedQuiz: Quiz | null;
+  theme: Theme;
   onToggle: (newTheme: Theme) => void;
 }
 
