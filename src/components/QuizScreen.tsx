@@ -18,10 +18,17 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
   } = useQuiz(activeQuiz, onScoreUpdate, onFinish);
 
   const questionCountRef = useRef<HTMLParagraphElement>(null);
+  const answersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     questionCountRef.current?.focus();
   }, [currentIndex]);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      answersRef.current?.focus();
+    }
+  }, [isSubmitted]);
 
   return (
     <section className="flex flex-col gap-6 desktop:grid desktop:grid-cols-2 desktop:grid-rows-[1fr_auto] desktop:gap-x-32" aria-label="Quiz question">
@@ -42,7 +49,10 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 desktop:row-start-1" role="radiogroup" aria-label="Answer options">
+      <div className="flex flex-col gap-4 desktop:row-start-1 outline-none" ref={answersRef}
+        tabIndex={-1}
+        role="radiogroup"
+        aria-label="Answer options">
         {currentQuestion.options.map((option, index) => (
           <AnswerOption
             key={option}
