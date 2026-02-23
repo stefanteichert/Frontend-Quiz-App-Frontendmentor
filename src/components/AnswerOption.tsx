@@ -15,20 +15,29 @@ const AnswerOption = ({ option, index, answerUser, isSubmitted, correctAnswer, o
   const isCorrect = option === correctAnswer;
   const isWrong = option === answerUser && !isCorrect;
 
+  const getAriaLabel = () => {
+    if (!isSubmitted) return option;
+    if (isCorrect) return `${option} – correct`;
+    if (isWrong) return `${option} – incorrect`;
+    return option;
+  };
+
   return (
     <button
       type="button"
       onClick={() => onAnswer(option)}
-      aria-pressed={answerUser === option}
-      aria-disabled={isSubmitted}
+      aria-label={getAriaLabel()}
+      role="radio"
+      aria-checked={answerUser === option}
+      disabled={isSubmitted}
       className={`flex items-center gap-4 w-full p-4 rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm transition-all hover:cursor-pointer ${getButtonStyle(option, answerUser, isSubmitted, correctAnswer)}`}
     >
       <div className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg transition-colors ${getLetterStyle(option, answerUser, isSubmitted, correctAnswer)}`}>
         <span className="text-preset-4">{String.fromCharCode(65 + index)}</span>
       </div>
       <span className="text-blue-900 dark:text-white">{option}</span>
-      {isSubmitted && isCorrect && <img src={iconCorrect} alt="" aria-hidden="true" className="ml-auto" />}
-      {isSubmitted && isWrong && <img src={iconIncorrect} alt="" aria-hidden="true" className="ml-auto" />}
+      {isSubmitted && isCorrect && <img src={iconCorrect} alt="correct" aria-hidden="true" className="ml-auto" />}
+      {isSubmitted && isWrong && <img src={iconIncorrect} alt="incorrect" aria-hidden="true" className="ml-auto" />}
     </button>
   );
 };

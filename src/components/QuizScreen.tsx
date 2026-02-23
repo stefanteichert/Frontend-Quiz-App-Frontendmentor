@@ -34,7 +34,7 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 desktop:row-start-1">
+      <div className="flex flex-col gap-4 desktop:row-start-1" role="radiogroup" aria-label="Answer options">
         {currentQuestion.options.map((option, index) => (
           <AnswerOption
             key={option}
