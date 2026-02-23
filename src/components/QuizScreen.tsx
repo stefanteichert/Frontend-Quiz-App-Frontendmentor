@@ -1,9 +1,7 @@
 import { useQuiz } from "../hooks/useQuiz";
 import type { Quiz } from "../types";
-import iconCorrect from '../assets/images/icon-correct.svg';
-import iconIncorrect from '../assets/images/icon-incorrect.svg';
 import iconError from '../assets/images/icon-error.svg';
-import { getButtonStyle, getLetterStyle } from '../utils/quizStyles';
+import AnswerOption from "./AnswerOption";
 
 interface QuizScreenProps {
   activeQuiz: Quiz;
@@ -38,28 +36,15 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
 
       <div className="flex flex-col gap-4 desktop:flex-1">
         {currentQuestion.options.map((option, index) => (
-          <button
-            type="button"
+          <AnswerOption
             key={option}
-            onClick={() => handleAnswer(option)}
-            className={`flex items-center gap-4 w-full p-4 rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm transition-all hover:cursor-pointer ${getButtonStyle(option, answerUser, isSubmitted, currentQuestion.answer)}`}
-          >
-            <div
-              className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg transition-colors ${getLetterStyle(option, answerUser, isSubmitted, currentQuestion.answer)}`}
-            >
-              <span className="text-preset-4">
-                {String.fromCharCode(65 + index)}
-              </span>
-            </div>
-            <span className="text-blue-900 dark:text-white">{option}</span>
-
-            {isSubmitted && option === currentQuestion.answer && (
-              <img src={iconCorrect} alt="correct" className="ml-auto" />
-            )}
-            {isSubmitted && option === answerUser && option !== currentQuestion.answer && (
-              <img src={iconIncorrect} alt="incorrect" className="ml-auto" />
-            )}
-          </button>
+            option={option}
+            index={index}
+            answerUser={answerUser}
+            isSubmitted={isSubmitted}
+            correctAnswer={currentQuestion.answer}
+            onAnswer={handleAnswer}
+          />
         ))}
 
         {!isSubmitted ? (
