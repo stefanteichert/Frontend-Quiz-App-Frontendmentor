@@ -17,9 +17,9 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
   } = useQuiz(activeQuiz, onScoreUpdate, onFinish);
 
   return (
-    <section className="flex flex-col gap-10 desktop:flex-row desktop:gap-32">
+    <section className="flex flex-col gap-6 desktop:grid desktop:grid-cols-2 desktop:grid-rows-[1fr_auto] desktop:gap-x-32">
 
-      <div className="w-full flex flex-col gap-4 desktop:gap-12 desktop:max-w-116.25 desktop:pb-4">
+      <div className="w-full flex flex-col gap-4 desktop:gap-12 desktop:max-w-116.25 desktop:row-start-1">
         <p className="text-preset-5 italic text-grey-500 tablet:text-preset-6 dark:text-blue-300">
           Question {currentIndex + 1} of {activeQuiz.questions.length}
         </p>
@@ -34,7 +34,7 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 desktop:flex-1">
+      <div className="flex flex-col gap-4 desktop:row-start-1">
         {currentQuestion.options.map((option, index) => (
           <AnswerOption
             key={option}
@@ -46,7 +46,9 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
             onAnswer={handleAnswer}
           />
         ))}
+      </div>
 
+      <div className="flex flex-col gap-4 relative desktop:col-start-2 desktop:row-start-2">
         {!isSubmitted ? (
           <button
             type="button"
@@ -66,12 +68,13 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
         )}
 
         {showError && !answerUser && (
-          <div className="flex items-center justify-center gap-2 text-red-500">
-            <img src={iconError} alt="" />
+          <div className="absolute -bottom-10 left-0 right-0 flex items-center justify-center gap-2 text-red-500" role="alert">
+            <img src={iconError} alt="" aria-hidden="true" />
             <p className="text-preset-5">Please select an answer</p>
           </div>
         )}
       </div>
+
     </section>
   );
 };

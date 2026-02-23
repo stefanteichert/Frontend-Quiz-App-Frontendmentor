@@ -77,7 +77,7 @@ function App() {
 
   return (
     <div className="app-background min-h-screen flex flex-col bg-gray-50 dark:bg-blue-900 animate-in fade-in duration-1000">
-      <div className="w-full min-w-81.75 tablet:max-w-160 desktop:max-w-290 mx-auto flex flex-col pt-6 px-6 tablet:pt-8 desktop:pt-18">
+      <div className="w-full min-w-81.75 tablet:max-w-160 desktop:max-w-290 mx-auto flex flex-col pt-6 px-6 tablet:pt-8 ">
         <Header theme={theme} onToggle={setTheme} selectedQuiz={activeQuiz} />
         <main className="mt-8 tablet:mt-10 desktop:mt-24.75">
           {status === 'results' ? (
