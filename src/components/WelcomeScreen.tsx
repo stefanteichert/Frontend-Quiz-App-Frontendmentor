@@ -3,7 +3,7 @@ import { getTopicTheme } from "../constants/quizTheme";
 
 interface WelcomeScreenProps {
   quizzes: Quiz[];
-  onSelect: (quizTitle: string) => void;
+  onSelect: (quiz: Quiz) => void;
 }
 
 
@@ -24,7 +24,7 @@ const WelcomeScreen = ({ quizzes, onSelect }: WelcomeScreenProps) => {
           return (
             <button
               key={quiz.title}
-              onClick={() => onSelect(quiz.title)}
+              onClick={() => onSelect(quiz)}
               className="flex items-center gap-4 w-full p-4  rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm hover:ring-3 hover:ring-purple-600 transition-all group hover:cursor-pointer "
             >
               <div className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg ${quizTheme?.bg}`}>

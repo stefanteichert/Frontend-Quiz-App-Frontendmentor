@@ -8,7 +8,7 @@ import ResultScreen from './components/ResultScreen';
 function App() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [status, setStatus] = useState<AppStatus>('loading');
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [activeQuiz, setActiveQuiz] = useState<Quiz | null>(null);
   const [score, setScore] = useState(0);
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('theme');
@@ -43,10 +43,8 @@ function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const activeQuiz = quizzes.find(q => q.title === selectedTopic) || null;
-
-  const handleSelectQuiz = (topic: string) => {
-    setSelectedTopic(topic);
+  const handleSelectQuiz = (quiz: Quiz) => {
+    setActiveQuiz(quiz);
     setScore(0);
   };
 
@@ -56,13 +54,13 @@ function App() {
 
   const resetQuiz = () => {
     setStatus('ready');
-    setSelectedTopic(null);
+    setActiveQuiz(null);
     setScore(0);
-  }
+  };
 
   if (status === 'loading') {
     return (
-      <div className={`${theme} min-h-screen flex justify-center items-center bg-gray-50 dark:bg-blue-900 transition-colors`}>
+      <div className=" min-h-screen flex justify-center items-center bg-gray-50 dark:bg-blue-900 transition-colors">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-blue-900 dark:text-grey-50 font-medium tracking-widest animate-pulse">
@@ -84,7 +82,7 @@ function App() {
         <main className="mt-8 tablet:mt-10 desktop:mt-24.75">
           {status === 'results' ? (
             <ResultScreen score={score} selectedQuiz={activeQuiz} resetQuiz={resetQuiz} />
-          ) : !selectedTopic ? (
+          ) : !activeQuiz ? (
             <WelcomeScreen quizzes={quizzes} onSelect={handleSelectQuiz} />
           ) : (
             <QuizScreen
