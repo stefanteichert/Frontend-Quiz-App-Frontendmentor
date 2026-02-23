@@ -3,6 +3,7 @@ import type { Quiz } from "../types";
 import iconCorrect from '../assets/images/icon-correct.svg';
 import iconIncorrect from '../assets/images/icon-incorrect.svg';
 import iconError from '../assets/images/icon-error.svg';
+import { getButtonStyle, getLetterStyle } from '../utils/quizStyles';
 
 interface QuizScreenProps {
   activeQuiz: Quiz | null;
@@ -43,27 +44,27 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
     setShowError(false);
   };
 
-  const getButtonStyle = (option: string) => {
-    if (!isSubmitted) {
-      return answerUser === option
-        ? "ring-3 ring-purple-600"
-        : "hover:ring-3 hover:ring-purple-600";
-    }
-    if (option === currentQuestion.answer) return "ring-3 ring-green-500";
-    if (option === answerUser) return "ring-3 ring-red-500";
-    return "";
-  };
-
-  const getLetterStyle = (option: string) => {
-    if (!isSubmitted) {
-      return answerUser === option
-        ? "bg-purple-600 text-white"
-        : "bg-grey-50 text-grey-500";
-    }
-    if (option === currentQuestion.answer) return "bg-green-500 text-white";
-    if (option === answerUser) return "bg-red-500 text-white";
-    return "bg-grey-50 text-grey-500";
-  };
+  /*   const getButtonStyle = (option: string) => {
+      if (!isSubmitted) {
+        return answerUser === option
+          ? "ring-3 ring-purple-600"
+          : "hover:ring-3 hover:ring-purple-600";
+      }
+      if (option === currentQuestion.answer) return "ring-3 ring-green-500";
+      if (option === answerUser) return "ring-3 ring-red-500";
+      return "";
+    };
+  
+    const getLetterStyle = (option: string) => {
+      if (!isSubmitted) {
+        return answerUser === option
+          ? "bg-purple-600 text-white"
+          : "bg-grey-50 text-grey-500";
+      }
+      if (option === currentQuestion.answer) return "bg-green-500 text-white";
+      if (option === answerUser) return "bg-red-500 text-white";
+      return "bg-grey-50 text-grey-500";
+    }; */
 
   return (
     <section className="flex flex-col gap-10 desktop:flex-row desktop:gap-32">
@@ -89,10 +90,10 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
             type="button"
             key={option}
             onClick={() => handleAnswer(option)}
-            className={`flex items-center gap-4 w-full p-4 rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm transition-all hover:cursor-pointer ${getButtonStyle(option)}`}
+            className={`flex items-center gap-4 w-full p-4 rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm transition-all hover:cursor-pointer ${getButtonStyle(option, answerUser, isSubmitted, currentQuestion.answer)}`}
           >
             <div
-              className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg transition-colors ${getLetterStyle(option)}`}
+              className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg transition-colors ${getLetterStyle(option, answerUser, isSubmitted, currentQuestion.answer)}`}
             >
               <span className="text-preset-4">
                 {String.fromCharCode(65 + index)}
