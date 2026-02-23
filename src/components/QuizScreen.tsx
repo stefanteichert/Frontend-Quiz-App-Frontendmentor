@@ -2,6 +2,7 @@ import { useQuiz } from "../hooks/useQuiz";
 import type { Quiz } from "../types";
 import iconError from '../assets/images/icon-error.svg';
 import AnswerOption from "./AnswerOption";
+import { useRef, useEffect } from "react";
 
 interface QuizScreenProps {
   activeQuiz: Quiz;
@@ -16,17 +17,24 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
     handleAnswer, handleSubmit, handleNext,
   } = useQuiz(activeQuiz, onScoreUpdate, onFinish);
 
+  const questionCountRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    questionCountRef.current?.focus();
+  }, [currentIndex]);
+
   return (
-    <section className="flex flex-col gap-6 desktop:grid desktop:grid-cols-2 desktop:grid-rows-[1fr_auto] desktop:gap-x-32">
+    <section className="flex flex-col gap-6 desktop:grid desktop:grid-cols-2 desktop:grid-rows-[1fr_auto] desktop:gap-x-32" aria-label="Quiz question">
 
       <div className="w-full flex flex-col gap-4 desktop:gap-12 desktop:max-w-116.25 desktop:row-start-1">
-        <p className="text-preset-5 italic text-grey-500 tablet:text-preset-6 dark:text-blue-300">
+        <p ref={questionCountRef}
+          tabIndex={-1} className="text-preset-5 italic text-grey-500 tablet:text-preset-6 dark:text-blue-300 outline-none">
           Question {currentIndex + 1} of {activeQuiz.questions.length}
         </p>
         <h1 className="text-preset-3 text-blue-900 dark:text-white">
           {currentQuestion.question}
         </h1>
-        <div className="w-full h-4 bg-white dark:bg-blue-850 rounded-full p-1 mt-auto">
+        <div className="w-full h-4 bg-white dark:bg-blue-850 rounded-full p-1 mt-auto" aria-hidden="true">
           <div
             className="h-full bg-purple-600 rounded-full transition-all duration-300 ease-in-out"
             style={{ width: `${progress}%` }}
