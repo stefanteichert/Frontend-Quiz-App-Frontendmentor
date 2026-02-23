@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useQuiz } from "../hooks/useQuiz";
 import type { Quiz } from "../types";
 import iconCorrect from '../assets/images/icon-correct.svg';
 import iconIncorrect from '../assets/images/icon-incorrect.svg';
@@ -6,65 +6,17 @@ import iconError from '../assets/images/icon-error.svg';
 import { getButtonStyle, getLetterStyle } from '../utils/quizStyles';
 
 interface QuizScreenProps {
-  activeQuiz: Quiz | null;
+  activeQuiz: Quiz;
   onScoreUpdate: () => void;
   onFinish: () => void;
 }
 
 const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answerUser, setAnswerUser] = useState<string | null>(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [showError, setShowError] = useState(false);
-
-
-  if (!activeQuiz) return null;
-
-  const currentQuestion = activeQuiz.questions[currentIndex];
-  const isLastQuestion = currentIndex === activeQuiz.questions.length - 1;
-  const progress = (currentIndex / activeQuiz.questions.length) * 100;
-
-  const handleAnswer = (option: string) => {
-    if (isSubmitted) return;
-    setAnswerUser(option);
-    setShowError(false);
-  };
-
-  const handleSubmit = () => {
-    if (answerUser === null) return setShowError(true);
-    if (answerUser === currentQuestion.answer) onScoreUpdate();
-    setIsSubmitted(true);
-  };
-
-  const handleNext = () => {
-    if (isLastQuestion) return onFinish();
-    setCurrentIndex((prev) => prev + 1);
-    setAnswerUser(null);
-    setIsSubmitted(false);
-    setShowError(false);
-  };
-
-  /*   const getButtonStyle = (option: string) => {
-      if (!isSubmitted) {
-        return answerUser === option
-          ? "ring-3 ring-purple-600"
-          : "hover:ring-3 hover:ring-purple-600";
-      }
-      if (option === currentQuestion.answer) return "ring-3 ring-green-500";
-      if (option === answerUser) return "ring-3 ring-red-500";
-      return "";
-    };
-  
-    const getLetterStyle = (option: string) => {
-      if (!isSubmitted) {
-        return answerUser === option
-          ? "bg-purple-600 text-white"
-          : "bg-grey-50 text-grey-500";
-      }
-      if (option === currentQuestion.answer) return "bg-green-500 text-white";
-      if (option === answerUser) return "bg-red-500 text-white";
-      return "bg-grey-50 text-grey-500";
-    }; */
+  const {
+    currentQuestion, currentIndex, isLastQuestion,
+    progress, answerUser, isSubmitted, showError,
+    handleAnswer, handleSubmit, handleNext,
+  } = useQuiz(activeQuiz, onScoreUpdate, onFinish);
 
   return (
     <section className="flex flex-col gap-10 desktop:flex-row desktop:gap-32">
