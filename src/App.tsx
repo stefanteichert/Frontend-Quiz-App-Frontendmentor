@@ -60,7 +60,7 @@ function App() {
 
   if (status === 'loading') {
     return (
-      <div className=" min-h-screen flex justify-center items-center bg-gray-50 dark:bg-blue-900 transition-colors">
+      <div className=" min-h-screen flex justify-center items-center bg-gray-50 dark:bg-blue-900 transition-colors" aria-hidden="true">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-blue-900 dark:text-grey-50 font-medium tracking-widest animate-pulse">
@@ -79,7 +79,7 @@ function App() {
     <div className="app-background min-h-screen flex flex-col bg-gray-50 dark:bg-blue-900 animate-in fade-in duration-1000">
       <div className="w-full min-w-81.75 tablet:max-w-160 desktop:max-w-290 mx-auto flex flex-col pt-6 px-6 tablet:pt-8 ">
         <Header theme={theme} onToggle={setTheme} selectedQuiz={activeQuiz} />
-        <main className="mt-8 tablet:mt-10 desktop:mt-24.75">
+        <main className="mt-8 tablet:mt-10 desktop:mt-24.75" aria-label="Quiz app">
           {status === 'results' ? (
             <ResultScreen score={score} selectedQuiz={activeQuiz} resetQuiz={resetQuiz} />
           ) : !activeQuiz ? (
