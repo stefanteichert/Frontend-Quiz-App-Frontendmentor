@@ -13,8 +13,8 @@ const Header = ({ selectedQuiz, theme, onToggle }: HeaderProps) => {
   const quizTheme = selectedQuiz ? getTopicTheme(selectedQuiz.title) : null;
 
   return (
-    <header className="flex items-center justify-between py-4">
-      <div className="flex items-center gap-4">
+    <header className="flex items-center justify-between py-4" aria-label="Site header">
+      <div aria-hidden="true" className="flex items-center gap-4">
         {selectedQuiz && (
           <>
             <div className={`p-2 rounded-lg ${quizTheme?.bg}`}>
