@@ -20,7 +20,7 @@ const ThemeToggle = ({ theme, onToggle }: ThemeToggleProps) => {
           className="peer sr-only"
           checked={theme === 'dark'}
           onChange={(e) => onToggle(e.target.checked ? 'dark' : 'light')}
-          aria-label="toggle dark mode"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         />
 
         {/* Track */}
