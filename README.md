@@ -35,15 +35,15 @@ Users should be able to:
 
 ### Screenshot
 
-![Screenshot Light Mode](./screenshot.jpg)
-![Screenshot Dark Mode](./screenshot.jpg)
+![Screenshot Light Mode](./screenshot-light.png)
+![Screenshot Dark Mode](./screenshot-dark.png)
 
 ---
 
 ### Links
 
-- Solution URL: [Frontend Mentor Solution](https://your-solution-url.com)
-- Live Site URL: [Live Demo](https://your-live-site-url.com)
+- Solution URL: [Frontend Mentor Solution](https://www.frontendmentor.io/solutions/frontend-quiz-app-with-react-typescript-tailwindcss-vite-testing-ZbXnhITW-2)
+- Live Site URL: [Live Demo](https://frontend-quiz-app-frontendmentor.vercel.app/)
 
 ---
 
@@ -189,7 +189,7 @@ I should have committed more frequently throughout the process. I often had larg
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor - [@Stefan](https://www.frontendmentor.io/profile/stefanteichert)
 
 
 ---
