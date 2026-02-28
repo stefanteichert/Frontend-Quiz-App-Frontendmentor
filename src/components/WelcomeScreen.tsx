@@ -29,14 +29,14 @@ const WelcomeScreen = ({ quizzes, onSelect }: WelcomeScreenProps) => {
               onClick={() => onSelect(quiz)}
               className="flex items-center gap-4 w-full p-4  rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm hover:ring-3 hover:ring-purple-600 transition-all group hover:cursor-pointer "
             >
-              <div className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg ${quizTheme.bg}`}>
+              <span className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg ${quizTheme.bg}`}>
                 <img
                   src={quiz.icon}
                   alt=""
                   className="min-w-7 min-h-7 "
                   aria-hidden="true"
                 />
-              </div>
+              </span>
 
               <span className="text-preset-4 text-blue-900 dark:text-white">
                 {quiz.title}
