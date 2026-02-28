@@ -19,16 +19,10 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const fetchPromise = fetch('/data.json').then(res => {
-          if (!res.ok) throw new Error();
-          return res.json();
-        });
-
-        const timerPromise = new Promise(resolve => setTimeout(resolve, 1000));
-        const [data] = await Promise.all([fetchPromise, timerPromise]);
-
-        const typedData = data as DataStructure;
-        setQuizzes(typedData.quizzes);
+        const res = await fetch('/data.json');
+        if (!res.ok) throw new Error();
+        const data = await res.json() as DataStructure;
+        setQuizzes(data.quizzes);
         setStatus('ready');
       } catch (error) {
         setStatus('error');
