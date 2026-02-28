@@ -49,14 +49,14 @@ describe('AnswerOption', () => {
     expect(onAnswer).not.toHaveBeenCalled();
   });
 
-  it('has aria-checked false when not selected', () => {
+  it('is not checked when not selected', () => {
     render(<AnswerOption {...defaultProps} />);
-    expect(screen.getByRole('radio')).toHaveAttribute('aria-checked', 'false');
+    expect(screen.getByRole('radio')).not.toBeChecked();
   });
 
-  it('has aria-checked true when selected', () => {
+  it('is checked when selected', () => {
     render(<AnswerOption {...defaultProps} answerUser="CSS" />);
-    expect(screen.getByRole('radio')).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getByRole('radio')).toBeChecked();
   });
 
   it('shows correct icon after submit when option is correct answer', () => {

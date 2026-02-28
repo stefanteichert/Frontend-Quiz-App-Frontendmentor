@@ -21,14 +21,12 @@ const QuizScreen = ({ activeQuiz, onScoreUpdate, onFinish }: QuizScreenProps) =>
   const answersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    questionCountRef.current?.focus();
-  }, [currentIndex]);
-
-  useEffect(() => {
     if (isSubmitted) {
       answersRef.current?.focus();
+    } else {
+      questionCountRef.current?.focus();
     }
-  }, [isSubmitted]);
+  }, [currentIndex, isSubmitted]);
 
   return (
     <section className="flex flex-col gap-6 desktop:grid desktop:grid-cols-2 desktop:grid-rows-[1fr_auto] desktop:gap-x-32" aria-label="Quiz question">

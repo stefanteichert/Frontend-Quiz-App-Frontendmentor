@@ -15,30 +15,32 @@ const AnswerOption = ({ option, index, answerUser, isSubmitted, correctAnswer, o
   const isCorrect = option === correctAnswer;
   const isWrong = option === answerUser && !isCorrect;
 
-  const getAriaLabel = () => {
-    if (!isSubmitted) return option;
-    if (isCorrect) return `${option} – correct`;
-    if (isWrong) return `${option} – incorrect`;
-    return option;
-  };
-
   return (
-    <button
-      type="button"
-      onClick={() => onAnswer(option)}
-      aria-label={getAriaLabel()}
-      role="radio"
-      aria-checked={answerUser === option}
-      disabled={isSubmitted}
-      className={`flex items-center gap-4 w-full p-4 rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm transition-all hover:cursor-pointer ${getButtonStyle(option, answerUser, isSubmitted, correctAnswer)}`}
+    <label
+      className={`flex items-center gap-4 w-full p-4 rounded-xl tablet:rounded-3xl bg-white dark:bg-blue-850 shadow-sm transition-all cursor-pointer has-focus-visible:ring-3 has-focus-visible:ring-purple-600 ${getButtonStyle(option, answerUser, isSubmitted, correctAnswer)}`}
     >
+      <input
+        type="radio"
+        name="answer"
+        value={option}
+        checked={answerUser === option}
+        onChange={() => onAnswer(option)}
+        disabled={isSubmitted}
+        aria-label={
+          !isSubmitted ? option :
+            isCorrect ? `${option} – correct` :
+              isWrong ? `${option} – incorrect` :
+                option
+        }
+        className="sr-only"
+      />
       <span className={`min-w-10 min-h-10 flex items-center justify-center rounded-lg transition-colors ${getLetterStyle(option, answerUser, isSubmitted, correctAnswer)}`}>
         <span className="text-preset-4">{String.fromCharCode(65 + index)}</span>
       </span>
       <span className="text-blue-900 dark:text-white">{option}</span>
       {isSubmitted && isCorrect && <img src={iconCorrect} alt="correct" aria-hidden="true" className="ml-auto" />}
       {isSubmitted && isWrong && <img src={iconIncorrect} alt="incorrect" aria-hidden="true" className="ml-auto" />}
-    </button>
+    </label>
   );
 };
 
